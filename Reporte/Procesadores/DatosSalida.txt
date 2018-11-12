@@ -1,0 +1,29 @@
+Linea 1 : Total
+Linea 2 : TIRA TIRA PROG 4,936.5
+Linea 3 : CONOS 1,950.7
+Linea 4 : INSP Y ESC 4,990.4
+Linea 5 : COL CONT 761.9
+Linea 6 : VIAS A LC 1,027.2
+Linea 7 : VIAS A ESC 670.0
+Linea 8 : Total 14,336.6
+Linea 9 : PLACA PLACA PROG 6,113.4
+Linea 10 : CONOS 130.7
+Linea 11 : INSP Y ESC 5,085.9
+Linea 12 : COL CONT 0
+Linea 13 : VIAS A LC 12.6
+Linea 14 : VIAS A ESC 389.3
+Linea 15 : Total 11,732.0
+Linea 16 : STECKEL STECKEL PROG 6,202.6
+Linea 17 : CONOS 5,082.0
+Linea 18 : INSP Y ESC 6,104.8
+Linea 19 : COL CONT 0
+Linea 20 : VIAS A STECKEL 1,503.6
+Linea 21 : VIAS A ESC 664.4
+Linea 22 : Total 19,557.3
+Linea 23 : NO PLANOS INSP Y ESC 195.4
+Linea 24 : COL CONT 0
+Linea 25 : NO PLANOS 1,828.0
+Linea 26 : Total 2,023.4
+Linea 27 : RESUMEN
+Linea 28 : RESUMEN DEL INVENTARIO DE PLANCHÓN AL 09/11/2018 07:00
+Linea 29 : Pág. 6 de 6
