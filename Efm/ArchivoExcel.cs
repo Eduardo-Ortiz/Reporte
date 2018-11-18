@@ -18,8 +18,8 @@ namespace ManejadorArchivos
     {
         public const int XLS = 1;
         public const int XLSX = 2;
-    }      
-  
+    }
+
     public class ArchivoExcel
     {
         private string ruta;
@@ -27,6 +27,7 @@ namespace ManejadorArchivos
         private HSSFWorkbook hssfwb;
         private XSSFWorkbook xssfwb;
         private ISheet sheet;
+        private string fecha;
 
         /// <summary>
         /// Constructor que carga el archivo Excel para su lectura y modificación.
@@ -35,28 +36,30 @@ namespace ManejadorArchivos
         public ArchivoExcel(string ruta)
         {
             this.ruta = ruta;
-            if(Path.GetExtension(ruta).ToLower()==".xls")
+            CalcularFecha();
+            if (Path.GetExtension(ruta).ToLower() == ".xls")
             {
                 tipo = TiposExcel.XLS;
             }
             else
             {
                 tipo = TiposExcel.XLSX;
-            }                 
+            }
             using (FileStream file = new FileStream(ruta, FileMode.Open, FileAccess.Read))
             {
-                if(tipo == TiposExcel.XLS)
+                if (tipo == TiposExcel.XLS)
                 {
                     hssfwb = new HSSFWorkbook(file);
                     sheet = hssfwb.GetSheetAt(0);
-                }                    
+                }
                 else
                 {
                     xssfwb = new XSSFWorkbook(file);
                     sheet = xssfwb.GetSheetAt(0);
-                }                           
+                }
                 file.Close();
-            }            
+            }
+
         }
 
         /// <summary>
@@ -89,11 +92,11 @@ namespace ManejadorArchivos
         public void GuardarCambios()
         {
             using (FileStream file = new FileStream(ruta, FileMode.Open, FileAccess.Write))
-            {              
+            {
                 if (tipo == TiposExcel.XLS)
                     hssfwb.Write(file);
                 else
-                    xssfwb.Write(file);                
+                    xssfwb.Write(file);
                 file.Close();
             }
         }
@@ -106,27 +109,27 @@ namespace ManejadorArchivos
         {
             CellReference cr = new CellReference(coordenadas);
             var row = sheet.GetRow(cr.Row);
-            var cell = row.GetCell(cr.Col);           
+            var cell = row.GetCell(cr.Col);
 
             if (tipo == TiposExcel.XLS)
             {
-                HSSFFormulaEvaluator  evaluator = new HSSFFormulaEvaluator(hssfwb);
+                HSSFFormulaEvaluator evaluator = new HSSFFormulaEvaluator(hssfwb);
                 CellValue cellValue = evaluator.Evaluate(cell);
 
                 if (cellValue.CellType == CellType.Numeric)
                     return cellValue.NumberValue.ToString();
                 else
-                    return cellValue.StringValue;               
-            }                      
+                    return cellValue.StringValue;
+            }
             else
             {
                 XSSFFormulaEvaluator evaluator = new XSSFFormulaEvaluator(xssfwb);
                 CellValue cellValue = evaluator.Evaluate(cell);
-                if (cellValue.CellType == CellType.Numeric)      
-                    return cellValue.NumberValue.ToString();    
-                else               
-                    return cellValue.StringValue;                
-            }                            
+                if (cellValue.CellType == CellType.Numeric)
+                    return cellValue.NumberValue.ToString();
+                else
+                    return cellValue.StringValue;
+            }
         }
 
         /// <summary>
@@ -137,7 +140,7 @@ namespace ManejadorArchivos
         public string ObtenerValorCoordenadas(string x, int y)
         {
             string coordenadas = x + y.ToString();
-            return this.ObtenerValorCoordenadas(coordenadas);         
+            return this.ObtenerValorCoordenadas(coordenadas);
         }
 
         /// <summary>
@@ -151,7 +154,7 @@ namespace ManejadorArchivos
             var row = sheet.GetRow(cr.Row);
             var cell = row.GetCell(cr.Col);
             cell.SetCellValue(valor);
-            cell.SetCellType(CellType.Numeric);    
+            cell.SetCellType(CellType.Numeric);
         }
 
         /// <summary>
@@ -163,7 +166,34 @@ namespace ManejadorArchivos
         public void GuardarValorNumerico(string x, int y, double valor)
         {
             string coordenadas = x + y.ToString();
-            this.GuardarValorNumerico(coordenadas,valor);
+            this.GuardarValorNumerico(coordenadas, valor);
+        }
+
+        /// <summary>
+        /// Guarda el valor númerico en la celda especificada en el dia anterior.
+        /// </summary>     
+        /// <param name="x">Letra correspondiente a la coordenada horizontal.</param>        
+        /// <param name="valor">Valor a guardar.</param>
+        public void GuardarValorNumericoDia(string y, double valor)
+        {
+            string coordenadas = fecha + y;
+            this.GuardarValorNumerico(coordenadas, valor);
+        }
+
+
+        private void CalcularFecha()
+        {
+            int numeroDia = DateTime.Now.AddDays(-1).Day;
+
+            switch (numeroDia)
+            {
+                case 1:
+                    fecha = "B";
+                    break;
+                case 17:
+                    fecha = "R";
+                    break;
+            }
         }
 
     }

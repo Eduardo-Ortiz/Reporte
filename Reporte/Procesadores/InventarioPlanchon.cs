@@ -52,9 +52,9 @@ namespace Reporte.Procesadores
             reporteNovedades.CambiarHoja("DATOS");
 
             //Se mapean los datos con su respectiva celda.
-            reporteNovedades.GuardarValorNumerico("J126", Textos.ExtraerNumeroComaDecimal(datos[1]));
-            reporteNovedades.GuardarValorNumerico("J127", Textos.ExtraerNumeroComaDecimal(datos[2]));
-            reporteNovedades.GuardarValorNumerico("J129", Textos.ExtraerNumeroComaDecimal(datos[3]));     
+            reporteNovedades.GuardarValorNumericoDia("126", Textos.ExtraerNumeroComaDecimal(datos[1]));
+            reporteNovedades.GuardarValorNumericoDia("127", Textos.ExtraerNumeroComaDecimal(datos[2]));
+            reporteNovedades.GuardarValorNumericoDia("129", Textos.ExtraerNumeroComaDecimal(datos[3]));     
            
             //Se confirman los cambios en el archivo.
             reporteNovedades.GuardarCambios();
