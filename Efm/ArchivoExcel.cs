@@ -190,11 +190,99 @@ namespace ManejadorArchivos
                 case 1:
                     fecha = "B";
                     break;
+                case 2:
+                    fecha = "C";
+                    break;
+                case 3:
+                    fecha = "D";
+                    break;
+                case 4:
+                    fecha = "E";
+                    break;
+                case 5:
+                    fecha = "F";
+                    break;
+                case 6:
+                    fecha = "G";
+                    break;
+                case 7:
+                    fecha = "H";
+                    break;
+                case 8:
+                    fecha = "I";
+                    break;
+                case 9:
+                    fecha = "J";
+                    break;
+                case 10:
+                    fecha = "K";
+                    break;
+                case 11:
+                    fecha = "L";
+                    break;
+                case 12:
+                    fecha = "M";
+                    break;
+                case 13:
+                    fecha = "N";
+                    break;
+                case 14:
+                    fecha = "O";
+                    break;
+                case 15:
+                    fecha = "P";
+                    break;
+                case 16:
+                    fecha = "Q";
+                    break;
                 case 17:
                     fecha = "R";
                     break;
+                case 18:
+                    fecha = "S";
+                    break;
+                case 19:
+                    fecha = "T";
+                    break;
+                case 20:
+                    fecha = "U";
+                    break;
+                case 21:
+                    fecha = "V";
+                    break;
+                case 22:
+                    fecha = "W";
+                    break;
+                case 23:
+                    fecha = "X";
+                    break;
+                case 24:
+                    fecha = "Y";
+                    break;
+                case 25:
+                    fecha = "Z";
+                    break;
+                case 26:
+                    fecha = "AA";
+                    break;
+                case 27:
+                    fecha = "AB";
+                    break;
+                case 28:
+                    fecha = "AC";
+                    break;
+                case 29:
+                    fecha = "AD";
+                    break;
+                case 30:
+                    fecha = "AE";
+                    break;
+                case 31:
+                    fecha = "AF";
+                    break;
             }
-        }
 
+        }
     }
-}
+ }
+
