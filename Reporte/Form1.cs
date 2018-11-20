@@ -15,6 +15,7 @@ namespace Reporte
     public partial class Form1 : Form
     {
         ArchivoExcel reporteNovedades;
+        //Hola
       
         public Form1()
         {
