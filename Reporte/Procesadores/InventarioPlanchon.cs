@@ -29,8 +29,22 @@ namespace Reporte.Procesadores
         /// </summary>
         public void Procesar()
         {
+
+            //Se obtiene la pagina número 1 del reporte
+            string total = datosInventarioPlanchon.ObtenerPaginaTabla(1);
+            //Guarda cada linea del archivo en una lista.
+            List<string> tabla = total.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            tabla = tabla[tabla.Count - 3].Split(' ').ToList();
+
+            var cantidadTotal = tabla[tabla.Count - 1];
+            cantidadTotal = cantidadTotal.Replace(",", "");
+
+            Console.WriteLine("El total es: " + cantidadTotal);
+
             //Se obtiene la pagina número 6 del reporte
             string texto = datosInventarioPlanchon.ObtenerPagina(6);         
+
+
 
             //Guarda cada linea del archivo en una lista.
             List<string> datos = texto.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();

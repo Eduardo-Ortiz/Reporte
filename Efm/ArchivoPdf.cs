@@ -43,6 +43,30 @@ namespace ManejadorArchivos
                 return sb.ToString();
             }
         }
+
+
+        /// <summary>
+        /// Obtiene la pagina tabla solicitada del archivo PDF en formato de string.
+        /// </summary>
+        /// <param name="pagina">Número de la pagina a obtener.</param>
+        public string ObtenerPaginaTabla(int pagina)
+        {
+            if (!File.Exists(ruta))
+                throw new FileNotFoundException("ruta");
+
+            using (PdfReader reader = new PdfReader(ruta))
+            {
+                StringBuilder sb = new StringBuilder();                
+
+                ITextExtractionStrategy its = new iTextSharp.text.pdf.parser.LocationTextExtractionStrategy();
+                string text = PdfTextExtractor.GetTextFromPage(reader, pagina, its);
+
+
+                sb.Append(Encoding.UTF8.GetString(ASCIIEncoding.Convert(Encoding.Default, Encoding.UTF8, Encoding.Default.GetBytes(text))));
+
+                return sb.ToString();
+            }
+        }
     }
 }
 
