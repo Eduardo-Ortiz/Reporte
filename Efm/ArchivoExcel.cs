@@ -109,7 +109,7 @@ namespace ManejadorArchivos
         {
             CellReference cr = new CellReference(coordenadas);
             var row = sheet.GetRow(cr.Row);
-            var cell = row.GetCell(cr.Col);
+            var cell = row.GetCell(cr.Col);        
 
             if (tipo == TiposExcel.XLS)
             {
@@ -178,6 +178,14 @@ namespace ManejadorArchivos
         {
             string coordenadas = fecha + y;
             this.GuardarValorNumerico(coordenadas, valor);
+        }
+
+        public void EvaluarFormulas()
+        {
+            if (tipo == TiposExcel.XLS)
+                HSSFFormulaEvaluator.EvaluateAllFormulaCells(hssfwb);
+            else
+                XSSFFormulaEvaluator.EvaluateAllFormulaCells(xssfwb);
         }
 
 

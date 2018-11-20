@@ -50,7 +50,7 @@ namespace Reporte
                
 
                
-                InventarioPlanchon inventarioPlanchon = new InventarioPlanchon(reporteNovedades, reportePlanchon, double.Parse(textBox1.Text));
+                InventarioPlanchon inventarioPlanchon = new InventarioPlanchon(reporteNovedades, reportePlanchon, double.Parse(textBox1.Text.Replace(".",",")));
                 inventarioPlanchon.Procesar();
             }
         }

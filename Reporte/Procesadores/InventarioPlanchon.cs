@@ -72,6 +72,7 @@ namespace Reporte.Procesadores
             //Se mapean los datos con su respectiva celda.
             reporteNovedades.GuardarValorNumericoDia("126", tiraProg);
             reporteNovedades.GuardarValorNumericoDia("127", Textos.ExtraerNumeroComaDecimal(datos[2]));
+            reporteNovedades.GuardarValorNumericoDia("128", resultadoResta);
             reporteNovedades.GuardarValorNumericoDia("129", Textos.ExtraerNumeroComaDecimal(datos[3]));
             reporteNovedades.GuardarValorNumericoDia("130", Textos.ExtraerNumeroComaDecimal(datos[4]));
             reporteNovedades.GuardarValorNumericoDia("131", Textos.ExtraerNumeroComaDecimal(datos[5]));
@@ -91,6 +92,9 @@ namespace Reporte.Procesadores
             //duda sobre ajuste
             reporteNovedades.GuardarValorNumericoDia("145", Textos.ExtraerNumeroComaDecimal(datos[20]));
             reporteNovedades.GuardarValorNumericoDia("147", Textos.ExtraerNumeroComaDecimal(datos[25]));
+
+            //Evalua todas las formulas.
+            reporteNovedades.EvaluarFormulas();
 
             //Se confirman los cambios en el archivo.
             reporteNovedades.GuardarCambios();
