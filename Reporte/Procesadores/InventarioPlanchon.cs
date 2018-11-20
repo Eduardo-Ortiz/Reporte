@@ -52,13 +52,6 @@ namespace Reporte.Procesadores
             reporteNovedades.CambiarHoja("DATOS");
 
 
-
-
-            for (int i = 0; i < datos.Count; i++)
-                Console.WriteLine("Datos " + i + "= "+ datos[i]);
-
-
-
             //Se mapean los datos con su respectiva celda.        
             reporteNovedades.GuardarValorNumericoDia("127", Textos.ExtraerNumeroComaDecimal(datos[2]));
             reporteNovedades.GuardarValorNumericoDia("129", Textos.ExtraerNumeroComaDecimal(datos[3]));
