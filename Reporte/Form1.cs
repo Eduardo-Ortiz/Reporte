@@ -30,7 +30,7 @@ namespace Reporte
                 string ruta = System.IO.Path.GetFullPath(openFileDialog1.FileName);
                 label1.Text = ruta;
 
-                reporteNovedades = new ArchivoExcel(ruta);                 
+                reporteNovedades = new ArchivoExcel(ruta);             
                              
                
             }

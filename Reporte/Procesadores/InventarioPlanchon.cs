@@ -51,31 +51,11 @@ namespace Reporte.Procesadores
             //Se abre la hoja de datos del archivo Excel.
             reporteNovedades.CambiarHoja("DATOS");
 
-
-            //Se mapean los datos con su respectiva celda.        
+            //Se mapean los datos con su respectiva celda.
+            reporteNovedades.GuardarValorNumericoDia("126", Textos.ExtraerNumeroComaDecimal(datos[1]));
             reporteNovedades.GuardarValorNumericoDia("127", Textos.ExtraerNumeroComaDecimal(datos[2]));
-            reporteNovedades.GuardarValorNumericoDia("129", Textos.ExtraerNumeroComaDecimal(datos[3]));
-            reporteNovedades.GuardarValorNumericoDia("130", Textos.ExtraerNumeroComaDecimal(datos[4]));
-            reporteNovedades.GuardarValorNumericoDia("131", Textos.ExtraerNumeroComaDecimal(datos[5]));
-            reporteNovedades.GuardarValorNumericoDia("132", Textos.ExtraerNumeroComaDecimal(datos[6]));
-            reporteNovedades.GuardarValorNumericoDia("134", Textos.ExtraerNumeroComaDecimal(datos[8]));
-            reporteNovedades.GuardarValorNumericoDia("135", Textos.ExtraerNumeroComaDecimal(datos[9]));
-            reporteNovedades.GuardarValorNumericoDia("136", Textos.ExtraerNumeroComaDecimal(datos[10]));
-            reporteNovedades.GuardarValorNumericoDia("137", Textos.ExtraerNumeroComaDecimal(datos[11]));
-            reporteNovedades.GuardarValorNumericoDia("138", Textos.ExtraerNumeroComaDecimal(datos[12]));
-            reporteNovedades.GuardarValorNumericoDia("139", Textos.ExtraerNumeroComaDecimal(datos[13]));
-            reporteNovedades.GuardarValorNumericoDia("140", Textos.ExtraerNumeroComaDecimal(datos[15]));
-            reporteNovedades.GuardarValorNumericoDia("141", Textos.ExtraerNumeroComaDecimal(datos[16]));
-            reporteNovedades.GuardarValorNumericoDia("142", Textos.ExtraerNumeroComaDecimal(datos[17]));
-            reporteNovedades.GuardarValorNumericoDia("143", Textos.ExtraerNumeroComaDecimal(datos[18]));
-            reporteNovedades.GuardarValorNumericoDia("144", Textos.ExtraerNumeroComaDecimal(datos[19]));
-
-            
-
-            //duda sobre ajuste
-            reporteNovedades.GuardarValorNumericoDia("145", Textos.ExtraerNumeroComaDecimal(datos[20]));
-            reporteNovedades.GuardarValorNumericoDia("147", Textos.ExtraerNumeroComaDecimal(datos[25]));
-
+            reporteNovedades.GuardarValorNumericoDia("129", Textos.ExtraerNumeroComaDecimal(datos[3]));     
+           
             //Se confirman los cambios en el archivo.
             reporteNovedades.GuardarCambios();
         }
