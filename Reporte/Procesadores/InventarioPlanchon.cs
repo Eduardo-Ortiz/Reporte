@@ -12,16 +12,18 @@ namespace Reporte.Procesadores
     {
         ArchivoExcel reporteNovedades;
         ArchivoPdf datosInventarioPlanchon;
+        double tiraProg;
 
         /// <summary>
         /// Constructor que carga el reporte donde se guardaran los datos y el archivo PDF del cual se obtendran.
         /// </summary>
         /// <param name="reporteNovedades">Archivo Excel donde se guardaran los datos.</param>
         /// <param name="datosInventarioPlanchon">Archivo PDF del cual se obtendran los datos.</param>
-        public InventarioPlanchon(ArchivoExcel reporteNovedades, ArchivoPdf datosInventarioPlanchon)
+        public InventarioPlanchon(ArchivoExcel reporteNovedades, ArchivoPdf datosInventarioPlanchon, double tiraProg)
         {
             this.reporteNovedades = reporteNovedades;
             this.datosInventarioPlanchon = datosInventarioPlanchon;
+            this.tiraProg = tiraProg;
         }
 
         /// <summary>
@@ -61,11 +63,14 @@ namespace Reporte.Procesadores
                     }                   
                 }                
             }
-            
+
+
+            var resultadoResta = Textos.ExtraerNumeroComaDecimal(datos[1]) - tiraProg;
             //Se abre la hoja de datos del archivo Excel.
             reporteNovedades.CambiarHoja("DATOS");
 
             //Se mapean los datos con su respectiva celda.
+            reporteNovedades.GuardarValorNumericoDia("126", tiraProg);
             reporteNovedades.GuardarValorNumericoDia("127", Textos.ExtraerNumeroComaDecimal(datos[2]));
             reporteNovedades.GuardarValorNumericoDia("129", Textos.ExtraerNumeroComaDecimal(datos[3]));
             reporteNovedades.GuardarValorNumericoDia("130", Textos.ExtraerNumeroComaDecimal(datos[4]));

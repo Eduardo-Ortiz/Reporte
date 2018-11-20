@@ -47,9 +47,14 @@ namespace Reporte
                 ArchivoPdf reportePlanchon;
                 reportePlanchon = new ArchivoPdf(ruta);
 
-                InventarioPlanchon inventarioPlanchon = new InventarioPlanchon(reporteNovedades, reportePlanchon);
+               
+
+               
+                InventarioPlanchon inventarioPlanchon = new InventarioPlanchon(reporteNovedades, reportePlanchon, double.Parse(textBox1.Text));
                 inventarioPlanchon.Procesar();
             }
         }
+
+      
     }
 }
