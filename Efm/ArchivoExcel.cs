@@ -143,6 +143,12 @@ namespace ManejadorArchivos
             return this.ObtenerValorCoordenadas(coordenadas);
         }
 
+        public string ObtenerValorCoordenadasDia(string x, int y)
+        {
+            string coordenadas = fecha + y.ToString();
+            return this.ObtenerValorCoordenadas(coordenadas);
+        }
+
         /// <summary>
         /// Guarda el valor númerico en la celda especificada
         /// </summary>     
