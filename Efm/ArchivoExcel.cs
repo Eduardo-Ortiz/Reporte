@@ -143,7 +143,12 @@ namespace ManejadorArchivos
             return this.ObtenerValorCoordenadas(coordenadas);
         }
 
-        public string ObtenerValorCoordenadasDia(string x, int y)
+
+        /// <summary>
+        /// Obtiene el valor de la celda del renglon especificado con la columna correspondiente al día actual.
+        /// </summary>       
+        /// <param name="y">Número correspondiente a la coordenada vertical.</param>
+        public string ObtenerValorRenglonDia(int y)
         {
             string coordenadas = fecha + y.ToString();
             return this.ObtenerValorCoordenadas(coordenadas);
@@ -178,7 +183,7 @@ namespace ManejadorArchivos
         /// <summary>
         /// Guarda el valor númerico en la celda especificada en el dia anterior.
         /// </summary>     
-        /// <param name="x">Letra correspondiente a la coordenada horizontal.</param>        
+        /// <param name="y">Letra correspondiente a la coordenada vertical.</param>        
         /// <param name="valor">Valor a guardar.</param>
         public void GuardarValorNumericoDia(string y, double valor)
         {
@@ -186,6 +191,9 @@ namespace ManejadorArchivos
             this.GuardarValorNumerico(coordenadas, valor);
         }
 
+        /// <summary>
+        /// Evalua el valor de todas las formulas del documento.
+        /// </summary>    
         public void EvaluarFormulas()
         {
             if (tipo == TiposExcel.XLS)
@@ -193,7 +201,6 @@ namespace ManejadorArchivos
             else
                 XSSFFormulaEvaluator.EvaluateAllFormulaCells(xssfwb);
         }
-
 
         private void CalcularFecha()
         {

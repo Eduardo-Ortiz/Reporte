@@ -31,5 +31,18 @@ namespace ManejadorArchivos.Utilidades
             //Se regresa el valor encontrado
             return double.Parse(valor);           
         }
+
+        /// <summary>
+        /// Convierte el texto a numero evitnado errores por formato.
+        /// </summary>     
+        /// <param name="cadena">Texto que se va a convertir en número.</param>   
+        public static double ConvertirANumero(string texto)
+        {
+            //Se da formato al valor.            
+            texto = texto.Replace(",", "");
+            texto = texto.Replace(".", ",");
+
+            return double.Parse(texto);
+        }
     }
 }
