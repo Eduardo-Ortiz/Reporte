@@ -95,6 +95,16 @@ namespace Reporte.Procesadores
 
             //Evalua todas las formulas.
             reporteNovedades.EvaluarFormulas();
+            double totalExcelNum = Textos.ConvertirANumero(reporteNovedades.ObtenerValorRenglonDia(148));
+            double totalInvplanchonNum = Textos.ConvertirANumero(cantidadTotal);
+            double ajuste = totalInvplanchonNum - totalExcelNum;
+
+            if (ajuste > 0)
+            {
+                double viasEscAjustada = Textos.ExtraerNumeroComaDecimal(datos[20]) + ajuste;
+                reporteNovedades.GuardarValorNumericoDia("145", viasEscAjustada);
+
+            }
 
             //Se confirman los cambios en el archivo.
             reporteNovedades.GuardarCambios();
