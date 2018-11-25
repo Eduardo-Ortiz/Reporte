@@ -17,7 +17,9 @@ namespace Reporte
     {
         DatosSalida salida;
         ArchivoExcel reporteNovedades;
-        InventarioPlanchon inventarioPlanchon;           
+        InventarioPlanchon inventarioPlanchon;
+        InventarioCoordinacion inventarioCoordinacion;
+
 
         public Principal()
         {
@@ -50,9 +52,31 @@ namespace Reporte
                 reportePlanchon = new ArchivoPdf(ruta);             
               
                 inventarioPlanchon = new InventarioPlanchon(reporteNovedades, reportePlanchon, double.Parse(txtTiraProg.Text.Replace(".",",")),salida);
-                inventarioPlanchon.Procesar();
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DialogResult resultado = openFileDialog2.ShowDialog();
+            if (resultado == DialogResult.OK)
+            {
+                string ruta = System.IO.Path.GetFullPath(openFileDialog2.FileName);
+                label6.Text = ruta;
+
+                ArchivoExcel reporteCoordinacion;
+                reporteCoordinacion = new ArchivoExcel(ruta, true);
+
+                inventarioCoordinacion = new InventarioCoordinacion(reporteNovedades, reporteCoordinacion);
+            }
+        }
+
+
+
 
         private void btnProcesar_Click(object sender, EventArgs e)
         {
@@ -61,13 +85,13 @@ namespace Reporte
             string mensaje = "";
 
             //Verifica que se haya cargado un archivo de reporte de novedades.
-            if(reporteNovedades==null)
+            if (reporteNovedades == null)
             {
                 error = true;
                 mensaje += "   -Seleccione el archivo de reporte de novedades." + Environment.NewLine;
             }
             //Verifica que se haya cargado un archivo de inventario de plachon.
-            if (inventarioPlanchon==null)
+            if (inventarioPlanchon == null)
             {
                 error = true;
                 mensaje += "   -Seleccione el archivo de inventario de planchon." + Environment.NewLine;
@@ -77,7 +101,14 @@ namespace Reporte
             {
                 error = true;
                 mensaje += "   -El campo \"Tira Prog\" no puede estar vacio." + Environment.NewLine;
-            }            
+            }
+
+            //Verifica que se haya cargado un archivo de inventario de coordinación.
+            if (inventarioCoordinacion == null)
+            {
+                error = true;
+                mensaje += "   -Seleccione el archivo de inventario de coordinacion." + Environment.NewLine;
+            }
 
             //Si existe un error se muestra al usuario y no se procesa el reporte.
             if (error)
@@ -89,14 +120,11 @@ namespace Reporte
             else
             {
                 inventarioPlanchon.Procesar();
+                inventarioCoordinacion.Procesar();
                 ReporteSalida reporteSalida = new ReporteSalida(salida);
                 reporteSalida.ShowDialog();
-            }          
+            }
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

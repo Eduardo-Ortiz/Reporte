@@ -71,6 +71,7 @@
     <Compile Include="Principal.Designer.cs">
       <DependentUpon>Principal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Procesadores\InventarioCoordinacion.cs" />
     <Compile Include="Procesadores\InventarioPlanchon.cs" />
     <Compile Include="Procesadores\InventarioSteckel.cs" />
     <Compile Include="Program.cs" />
