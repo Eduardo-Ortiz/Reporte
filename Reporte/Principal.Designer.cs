@@ -38,6 +38,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnProcesar = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -120,11 +122,32 @@
             this.btnProcesar.UseVisualStyleBackColor = true;
             this.btnProcesar.Click += new System.EventHandler(this.btnProcesar_Click);
             // 
-            // Form1
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(45, 131);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(208, 23);
+            this.button3.TabIndex = 7;
+            this.button3.Text = "Seleccionar Reporte Steckel";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(259, 136);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "label5";
+            // 
+            // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(690, 366);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.btnProcesar);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -133,7 +156,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
+            this.Name = "Principal";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -152,6 +175,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnProcesar;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label5;
     }
 }
 
