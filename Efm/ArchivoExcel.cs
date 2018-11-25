@@ -27,13 +27,13 @@ namespace ManejadorArchivos
         private HSSFWorkbook hssfwb;
         private XSSFWorkbook xssfwb;
         private ISheet sheet;
-        private string fecha;
+        private string fecha;    
 
         /// <summary>
         /// Constructor que carga el archivo Excel para su lectura y modificación.
         /// </summary>
         /// <param name="ruta">Ubicación fisica del archivo Excel.</param>
-        public ArchivoExcel(string ruta)
+        public ArchivoExcel(string ruta, bool sobreescribir)
         {
             this.ruta = ruta;
             CalcularFecha();
@@ -60,6 +60,26 @@ namespace ManejadorArchivos
                 file.Close();
             }
 
+            if(!sobreescribir)
+            {
+                string carpeta = System.IO.Path.GetDirectoryName(ruta);
+                string nombre = System.IO.Path.GetFileNameWithoutExtension(ruta);
+                string extension = System.IO.Path.GetExtension(ruta);
+                string nuevoNombre = nombre + "-Actualizado-" + DateTime.Now.ToString("yyyyMMddHHmmss") + extension;
+
+                Console.WriteLine(Path.Combine(carpeta, nuevoNombre));
+
+                using (FileStream file = new FileStream(Path.Combine(carpeta, nuevoNombre), FileMode.Create, System.IO.FileAccess.Write))
+                {
+                    if (tipo == TiposExcel.XLS)
+                        hssfwb.Write(file);
+                    else
+                        xssfwb.Write(file);
+                    file.Close();
+                }
+
+                this.ruta = Path.Combine(carpeta, nuevoNombre);
+            }
         }
 
         /// <summary>
@@ -99,7 +119,7 @@ namespace ManejadorArchivos
                     xssfwb.Write(file);
                 file.Close();
             }
-        }
+        }      
 
         /// <summary>
         /// Obtiene el valor de la celda con las coordenadas indicadas.
@@ -137,10 +157,10 @@ namespace ManejadorArchivos
         /// </summary>     
         /// <param name="x">Letra correspondiente a la coordenada horizontal.</param>
         /// <param name="y">Número correspondiente a la coordenada vertical.</param>
-        public string ObtenerValorCoordenadas(string x, int y)
+        public double ObtenerValorCoordenadas(string x, int y)
         {
             string coordenadas = x + y.ToString();
-            return this.ObtenerValorCoordenadas(coordenadas);
+            return double.Parse(this.ObtenerValorCoordenadas(coordenadas));
         }
 
 
@@ -148,10 +168,10 @@ namespace ManejadorArchivos
         /// Obtiene el valor de la celda del renglon especificado con la columna correspondiente al día actual.
         /// </summary>       
         /// <param name="y">Número correspondiente a la coordenada vertical.</param>
-        public string ObtenerValorRenglonDia(int y)
+        public double ObtenerValorRenglonDia(int y)
         {
             string coordenadas = fecha + y.ToString();
-            return this.ObtenerValorCoordenadas(coordenadas);
+            return double.Parse(this.ObtenerValorCoordenadas(coordenadas));
         }
 
         /// <summary>

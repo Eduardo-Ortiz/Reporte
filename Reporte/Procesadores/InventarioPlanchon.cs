@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ManejadorArchivos;
 using ManejadorArchivos.Utilidades;
+using Reporte.Salida;
 
 namespace Reporte.Procesadores
 {
@@ -13,17 +14,19 @@ namespace Reporte.Procesadores
         ArchivoExcel reporteNovedades;
         ArchivoPdf datosInventarioPlanchon;
         double tiraProg;
+        DatosSalida salida;
 
         /// <summary>
         /// Constructor que carga el reporte donde se guardaran los datos y el archivo PDF del cual se obtendran.
         /// </summary>
         /// <param name="reporteNovedades">Archivo Excel donde se guardaran los datos.</param>
         /// <param name="datosInventarioPlanchon">Archivo PDF del cual se obtendran los datos.</param>
-        public InventarioPlanchon(ArchivoExcel reporteNovedades, ArchivoPdf datosInventarioPlanchon, double tiraProg)
+        public InventarioPlanchon(ArchivoExcel reporteNovedades, ArchivoPdf datosInventarioPlanchon, double tiraProg, DatosSalida salida)
         {
             this.reporteNovedades = reporteNovedades;
             this.datosInventarioPlanchon = datosInventarioPlanchon;
             this.tiraProg = tiraProg;
+            this.salida = salida;
         }
 
         /// <summary>
@@ -95,16 +98,25 @@ namespace Reporte.Procesadores
 
             //Evalua todas las formulas.
             reporteNovedades.EvaluarFormulas();
-            double totalExcelNum = Textos.ConvertirANumero(reporteNovedades.ObtenerValorRenglonDia(148));
+            double totalExcelNum = reporteNovedades.ObtenerValorRenglonDia(148);
             double totalInvplanchonNum = Textos.ConvertirANumero(cantidadTotal);
             double ajuste = totalInvplanchonNum - totalExcelNum;
+
+
+            System.Console.WriteLine("Total Excel: " + totalExcelNum);
+            System.Console.WriteLine("Total Excel String: " + reporteNovedades.ObtenerValorRenglonDia(148));
+            System.Console.WriteLine("Total: " + totalInvplanchonNum);
+            System.Console.WriteLine("Ajuste: " + ajuste);
+
 
             if (ajuste > 0)
             {
                 double viasEscAjustada = Textos.ExtraerNumeroComaDecimal(datos[20]) + ajuste;
                 reporteNovedades.GuardarValorNumericoDia("145", viasEscAjustada);
-
+                reporteNovedades.EvaluarFormulas();                
             }
+
+            salida.AjustePlanchon = ajuste;
 
             //Se confirman los cambios en el archivo.
             reporteNovedades.GuardarCambios();
