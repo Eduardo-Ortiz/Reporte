@@ -34,26 +34,50 @@ namespace Reporte
             {
                 string ruta = System.IO.Path.GetFullPath(openFileDialog1.FileName);
                 label1.Text = ruta;
+                label1.Font = new Font(label1.Font, FontStyle.Regular);
 
-                reporteNovedades = new ArchivoExcel(ruta,false);
-                salida = new DatosSalida();         
+                reporteNovedades = new ArchivoExcel(ruta, false);
+                salida = new DatosSalida();
+
+                txtTiraProg.Enabled = true;
+                button2.Enabled = true;
+                button3.Enabled = true;
+                button4.Enabled = true;               
                                          
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DialogResult resultado = openFileDialog2.ShowDialog();
-            if (resultado == DialogResult.OK)
+            if(!string.IsNullOrEmpty(txtTiraProg.Text))
             {
-                string ruta = System.IO.Path.GetFullPath(openFileDialog2.FileName);
-                label2.Text = ruta;
+                DialogResult resultado = openFileDialog2.ShowDialog();
+                if (resultado == DialogResult.OK)
+                {
+                    string ruta = System.IO.Path.GetFullPath(openFileDialog2.FileName);
+                    label2.Text = ruta;
+                    label2.Font = new Font(label2.Font, FontStyle.Regular);
 
-                ArchivoPdf reportePlanchon;
-                reportePlanchon = new ArchivoPdf(ruta);             
-              
-                inventarioPlanchon = new InventarioPlanchon(reporteNovedades, reportePlanchon, double.Parse(txtTiraProg.Text.Replace(".",",")),salida);
+                    ArchivoPdf reportePlanchon;
+                    reportePlanchon = new ArchivoPdf(ruta);
+
+                    inventarioPlanchon = new InventarioPlanchon(reporteNovedades, reportePlanchon, double.Parse(txtTiraProg.Text.Replace(".", ",")), salida);
+
+                    if (!inventarioPlanchon.FechaValida())
+                    {
+                        DialogResult alertaFecha = MessageBox.Show("La fecha del reporte de Inventario Planchon seleccionado no es la correspondiente al día actual ¿Desea continuar?", "Inconsistencia en la fecha", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                        if (alertaFecha == DialogResult.No)
+                        {
+                            inventarioPlanchon = null;
+                            label2.Text = null;
+                        }
+                    }
+                }
             }
+            else
+            {
+                MessageBox.Show("Ingrese el valor necesario en el campo 'Tira Prog' antes de seleccionar el archivo de inventario de planchon", "Acción Requerida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }           
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -63,6 +87,7 @@ namespace Reporte
             {
                 string ruta = System.IO.Path.GetFullPath(openFileDialog2.FileName);
                 label5.Text = ruta;
+                label5.Font = new Font(label5.Font, FontStyle.Regular);
 
                 ArchivoPdf reporteSteckel;
                 reporteSteckel = new ArchivoPdf(ruta);
@@ -78,6 +103,7 @@ namespace Reporte
             {
                 string ruta = System.IO.Path.GetFullPath(openFileDialog2.FileName);
                 label6.Text = ruta;
+                label6.Font = new Font(label6.Font, FontStyle.Regular);
 
                 ArchivoExcel reporteCoordinacion;
                 reporteCoordinacion = new ArchivoExcel(ruta, true);
@@ -85,9 +111,6 @@ namespace Reporte
                 inventarioCoordinacion = new InventarioCoordinacion(reporteNovedades, reporteCoordinacion);
             }
         }
-
-
-
 
         private void btnProcesar_Click(object sender, EventArgs e)
         {

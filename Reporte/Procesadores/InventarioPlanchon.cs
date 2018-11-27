@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ManejadorArchivos;
 using ManejadorArchivos.Utilidades;
 using Reporte.Salida;
+using System.Globalization;
 
 namespace Reporte.Procesadores
 {
@@ -34,7 +35,6 @@ namespace Reporte.Procesadores
         /// </summary>
         public void Procesar()
         {
-
             //Se obtiene la pagina número 1 del reporte
             string total = datosInventarioPlanchon.ObtenerPaginaTabla(1);
             //Guarda cada linea del archivo en una lista.
@@ -44,29 +44,24 @@ namespace Reporte.Procesadores
             var cantidadTotal = tabla[tabla.Count - 1];
             cantidadTotal = cantidadTotal.Replace(",", "");
 
-            Console.WriteLine("El total es: " + cantidadTotal);
-
             //Se obtiene la pagina número 6 del reporte
-            string texto = datosInventarioPlanchon.ObtenerPagina(6);         
-
-
+            string texto = datosInventarioPlanchon.ObtenerPagina(6);
 
             //Guarda cada linea del archivo en una lista.
             List<string> datos = texto.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
             //Recorre todas las lineas del archivo.
-            for(int i = 0; i<datos.Count;i++)
+            for (int i = 0; i < datos.Count; i++)
             {
                 //Cuando encuentra una linea con el texto "INSP Y ESC" si la siguiente linea no es "COL CONT", inserta una linea con este dato en valor 0.
                 if (datos[i].Contains("INSP Y ESC"))
                 {
                     if (!datos[i + 1].Contains("COL CONT"))
                     {
-                        datos.Insert(i + 1, "COL CONT 0");                        
-                    }                   
-                }                
+                        datos.Insert(i + 1, "COL CONT 0");
+                    }
+                }
             }
-
 
             var resultadoResta = Textos.ExtraerNumeroComaDecimal(datos[1]) - tiraProg;
             //Se abre la hoja de datos del archivo Excel.
@@ -102,18 +97,11 @@ namespace Reporte.Procesadores
             double totalInvplanchonNum = Textos.ConvertirANumero(cantidadTotal);
             double ajuste = totalInvplanchonNum - totalExcelNum;
 
-
-            System.Console.WriteLine("Total Excel: " + totalExcelNum);
-            System.Console.WriteLine("Total Excel String: " + reporteNovedades.ObtenerValorRenglonDia(148));
-            System.Console.WriteLine("Total: " + totalInvplanchonNum);
-            System.Console.WriteLine("Ajuste: " + ajuste);
-
-
             if (ajuste > 0)
             {
                 double viasEscAjustada = Textos.ExtraerNumeroComaDecimal(datos[20]) + ajuste;
                 reporteNovedades.GuardarValorNumericoDia("145", viasEscAjustada);
-                reporteNovedades.EvaluarFormulas();                
+                reporteNovedades.EvaluarFormulas();
             }
 
             salida.AjustePlanchon = ajuste;
@@ -122,6 +110,30 @@ namespace Reporte.Procesadores
             reporteNovedades.GuardarCambios();
         }
 
+        /// <summary>
+        /// Verifica que la fecha del archivo sea valida.
+        /// </summary>
+        public bool FechaValida()
+        {
+            //Se obtiene la pagina número 1 del reporte
+            string texto = datosInventarioPlanchon.ObtenerPaginaTabla(1);
 
+            //Se obtiene la fecha del archivo PDF.
+            List<string> tabla = texto.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            var datos = tabla[0].Split(' ');
+            string fecha = datos[datos.Length-2];
+            DateTime fechaReporte = DateTime.ParseExact(fecha, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            Console.WriteLine(fechaReporte.ToString());
+
+            //Si la fecha no es valida regresa false, si es valida regresa true.
+            if(fechaReporte.Date !=DateTime.Now.Date)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }
