@@ -79,6 +79,14 @@ namespace Reporte.Procesadores
                 }
             }
 
+
+            //Se mapean los datos con su respectiva celda.
+            reporteNovedades.GuardarValorNumericoDia("61", valorRollo);
+            reporteNovedades.GuardarValorNumericoDia("60", valorPlaca);
+            reporteNovedades.GuardarValorNumericoDia("62", valorNormalizado);
+
+            //Se confirman los cambios en el archivo.
+            reporteNovedades.GuardarCambios();
         }
     }
 }

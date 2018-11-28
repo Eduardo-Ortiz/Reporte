@@ -119,13 +119,14 @@
             // 
             // btnProcesar
             // 
+            this.btnProcesar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnProcesar.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProcesar.Location = new System.Drawing.Point(253, 285);
+            this.btnProcesar.Location = new System.Drawing.Point(209, 255);
             this.btnProcesar.Name = "btnProcesar";
             this.btnProcesar.Size = new System.Drawing.Size(157, 52);
             this.btnProcesar.TabIndex = 6;
             this.btnProcesar.Text = "Procesar";
-            this.btnProcesar.UseVisualStyleBackColor = true;
+            this.btnProcesar.UseVisualStyleBackColor = false;
             this.btnProcesar.Click += new System.EventHandler(this.btnProcesar_Click);
             // 
             // button3
@@ -145,9 +146,9 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(259, 136);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(181, 13);
+            this.label5.Size = new System.Drawing.Size(167, 13);
             this.label5.TabIndex = 8;
-            this.label5.Text = "Reporte de Novedades no Steckel...";
+            this.label5.Text = "Reporte Steckel no Sleccionado..";
             // 
             // button4
             // 
@@ -174,7 +175,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 366);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ClientSize = new System.Drawing.Size(650, 367);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label5);
@@ -188,7 +190,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Name = "Principal";
-            this.Text = "Form1";
+            this.Text = "REPORTE NOVEDADES";
             this.ResumeLayout(false);
             this.PerformLayout();
 
